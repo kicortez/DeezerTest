@@ -10,7 +10,6 @@
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EA2747BC5700586191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E92747BC5700586191 /* ViewController.swift */; };
-		EAB512ED2747BC5700586191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EB2747BC5700586191 /* Main.storyboard */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
 		EAB512F22747BC5A00586191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EAB512E92747BC5700586191 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EAB512EC2747BC5700586191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EAB512EE2747BC5A00586191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAB512F12747BC5A00586191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAB512F32747BC5A00586191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 				EAB512E52747BC5700586191 /* AppDelegate.swift */,
 				EAB512E72747BC5700586191 /* SceneDelegate.swift */,
 				EAB512E92747BC5700586191 /* ViewController.swift */,
-				EAB512EB2747BC5700586191 /* Main.storyboard */,
 				EAB512EE2747BC5A00586191 /* Assets.xcassets */,
 				EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */,
 				EAB512F32747BC5A00586191 /* Info.plist */,
@@ -127,7 +124,6 @@
 			files = (
 				EAB512F22747BC5A00586191 /* LaunchScreen.storyboard in Resources */,
 				EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */,
-				EAB512ED2747BC5700586191 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EAB512EB2747BC5700586191 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EAB512EC2747BC5700586191 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,6 +277,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 85GFBAHEM6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DeezerTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -316,6 +305,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 85GFBAHEM6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DeezerTest/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
