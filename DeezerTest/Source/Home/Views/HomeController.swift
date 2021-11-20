@@ -10,6 +10,11 @@ import UIKit
 internal typealias HomeControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, Int>
 internal typealias HomeControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, Int>
 
+protocol HomeControllerDelegate: AnyObject {
+	// Dummy
+	func homeController(_ controller: HomeController, didSelectArtist artist: Int)
+}
+
 class HomeController: UIViewController {
 	
 	private let searchController = UISearchController(searchResultsController: nil)
@@ -24,6 +29,8 @@ class HomeController: UIViewController {
 		return collectionView
 	}()
 	
+	weak var delegate: HomeControllerDelegate?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -32,6 +39,8 @@ class HomeController: UIViewController {
     }
 	
 	private func setupViews() {
+		view.backgroundColor = .white
+		
 		setupCollectionView()
 		setupSearch()
 	}
@@ -47,6 +56,7 @@ class HomeController: UIViewController {
 	}
 	
 	private func setupCollectionView() {
+		collectionView.delegate = self
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(collectionView)
 		view.pin(collectionView)
@@ -65,7 +75,7 @@ class HomeController: UIViewController {
 }
 
 // MARK: - UICollectionView setup
-extension HomeController: UICollectionViewDelegate {
+extension HomeController {
 	
 	private func makeDataSource() -> HomeControllerCollectionDataSource {
 		let source = HomeControllerCollectionDataSource(collectionView: collectionView, cellProvider: {
@@ -108,6 +118,15 @@ extension HomeController: UICollectionViewDelegate {
 		section.interGroupSpacing = 8.0
 		
 		return section
+	}
+	
+}
+
+// MARK: - UICollectionViewDelegate
+extension HomeController: UICollectionViewDelegate {
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		delegate?.homeController(self, didSelectArtist: indexPath.item)
 	}
 	
 }

@@ -12,13 +12,17 @@ class AppCoordinator {
 	
 	private weak var window: UIWindow?
 	
+	private var homeCoordinator: HomeCoordinator?
+	
 	init(window: UIWindow) {
 		self.window = window
 	}
 	
 	func start() {
-		let homeController = HomeController()
-		let navigationController = UINavigationController(rootViewController: homeController)
+		let navigationController = UINavigationController()
+		let coordinator = HomeCoordinator(presenter: navigationController)
+		coordinator.start()
+		homeCoordinator = coordinator
 		
 		window?.rootViewController = navigationController
 		window?.makeKeyAndVisible()
