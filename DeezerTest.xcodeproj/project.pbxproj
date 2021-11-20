@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDD77AEF9BCBA1A3B5572EC0 /* Pods_DeezerTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D033DB2944776F07F56FF2 /* Pods_DeezerTest.framework */; };
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
@@ -22,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CE3C04FBE298DF669933E66 /* Pods-DeezerTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeezerTest.release.xcconfig"; path = "Target Support Files/Pods-DeezerTest/Pods-DeezerTest.release.xcconfig"; sourceTree = "<group>"; };
+		31D033DB2944776F07F56FF2 /* Pods_DeezerTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeezerTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CADA2008A2C4C70EC12DE51 /* Pods-DeezerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeezerTest.debug.xcconfig"; path = "Target Support Files/Pods-DeezerTest/Pods-DeezerTest.debug.xcconfig"; sourceTree = "<group>"; };
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,17 +47,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD77AEF9BCBA1A3B5572EC0 /* Pods_DeezerTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6794E7FEF801499D4FAD0FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31D033DB2944776F07F56FF2 /* Pods_DeezerTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EAB512D92747BC5700586191 = {
 			isa = PBXGroup;
 			children = (
 				EAB512E42747BC5700586191 /* DeezerTest */,
 				EAB512E32747BC5700586191 /* Products */,
+				F164DB635B1149FB97A64734 /* Pods */,
+				D6794E7FEF801499D4FAD0FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +164,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F164DB635B1149FB97A64734 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5CADA2008A2C4C70EC12DE51 /* Pods-DeezerTest.debug.xcconfig */,
+				2CE3C04FBE298DF669933E66 /* Pods-DeezerTest.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAB512F62747BC5A00586191 /* Build configuration list for PBXNativeTarget "DeezerTest" */;
 			buildPhases = (
+				EFB23A271EEE98CCF2B71318 /* [CP] Check Pods Manifest.lock */,
 				EAB512DE2747BC5700586191 /* Sources */,
 				EAB512DF2747BC5700586191 /* Frameworks */,
 				EAB512E02747BC5700586191 /* Resources */,
+				E624D2ABA493C93CA8B487C9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,6 +240,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E624D2ABA493C93CA8B487C9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DeezerTest/Pods-DeezerTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DeezerTest/Pods-DeezerTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeezerTest/Pods-DeezerTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFB23A271EEE98CCF2B71318 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DeezerTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EAB512DE2747BC5700586191 /* Sources */ = {
@@ -364,6 +433,7 @@
 		};
 		EAB512F72747BC5A00586191 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CADA2008A2C4C70EC12DE51 /* Pods-DeezerTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -392,6 +462,7 @@
 		};
 		EAB512F82747BC5A00586191 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CE3C04FBE298DF669933E66 /* Pods-DeezerTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
