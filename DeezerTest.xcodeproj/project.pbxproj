@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
-		EAB512EA2747BC5700586191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E92747BC5700586191 /* ViewController.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
 		EAB512F22747BC5A00586191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */; };
 		EAB512FA2748E41E00586191 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512F92748E41E00586191 /* AppCoordinator.swift */; };
+		EAB512FC2748E7DB00586191 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512FB2748E7DA00586191 /* HomeController.swift */; };
+		EAB512FE2748E9E100586191 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512FD2748E9E100586191 /* UIView+Extensions.swift */; };
+		EAB513002748F32C00586191 /* ArtistsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */; };
+		EAB513022748F36600586191 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB513012748F36600586191 /* UICollectionView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EAB512E92747BC5700586191 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EAB512EE2747BC5A00586191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAB512F12747BC5A00586191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAB512F32747BC5A00586191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAB512F92748E41E00586191 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		EAB512FB2748E7DA00586191 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		EAB512FD2748E9E100586191 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionCell.swift; sourceTree = "<group>"; };
+		EAB513012748F36600586191 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,66 @@
 		EAB512E42747BC5700586191 /* DeezerTest */ = {
 			isa = PBXGroup;
 			children = (
-				EAB512E52747BC5700586191 /* AppDelegate.swift */,
-				EAB512E72747BC5700586191 /* SceneDelegate.swift */,
-				EAB512E92747BC5700586191 /* ViewController.swift */,
-				EAB512EE2747BC5A00586191 /* Assets.xcassets */,
-				EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */,
-				EAB512F32747BC5A00586191 /* Info.plist */,
-				EAB512F92748E41E00586191 /* AppCoordinator.swift */,
+				EAB5130727492B3500586191 /* Config */,
+				EAB5130827492B6000586191 /* Source */,
 			);
 			path = DeezerTest;
+			sourceTree = "<group>";
+		};
+		EAB5130327492AE600586191 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512FD2748E9E100586191 /* UIView+Extensions.swift */,
+				EAB513012748F36600586191 /* UICollectionView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EAB5130427492AF100586191 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EAB5130527492B1900586191 /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EAB5130527492B1900586191 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512FB2748E7DA00586191 /* HomeController.swift */,
+				EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EAB5130627492B2D00586191 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512EE2747BC5A00586191 /* Assets.xcassets */,
+				EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EAB5130727492B3500586191 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512F32747BC5A00586191 /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		EAB5130827492B6000586191 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512E52747BC5700586191 /* AppDelegate.swift */,
+				EAB512E72747BC5700586191 /* SceneDelegate.swift */,
+				EAB512F92748E41E00586191 /* AppCoordinator.swift */,
+				EAB5130427492AF100586191 /* Home */,
+				EAB5130327492AE600586191 /* Extensions */,
+				EAB5130627492B2D00586191 /* Resources */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +194,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAB513022748F36600586191 /* UICollectionView+Extensions.swift in Sources */,
+				EAB512FC2748E7DB00586191 /* HomeController.swift in Sources */,
 				EAB512FA2748E41E00586191 /* AppCoordinator.swift in Sources */,
-				EAB512EA2747BC5700586191 /* ViewController.swift in Sources */,
+				EAB513002748F32C00586191 /* ArtistsCollectionCell.swift in Sources */,
+				EAB512FE2748E9E100586191 /* UIView+Extensions.swift in Sources */,
 				EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,
 			);
@@ -283,10 +343,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 85GFBAHEM6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DeezerTest/Info.plist;
+				INFOPLIST_FILE = DeezerTest/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -298,7 +358,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -311,10 +371,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 85GFBAHEM6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = DeezerTest/Info.plist;
+				INFOPLIST_FILE = DeezerTest/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,7 +386,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
