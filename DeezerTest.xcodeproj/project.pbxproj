@@ -12,6 +12,7 @@
 		EAB512EA2747BC5700586191 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E92747BC5700586191 /* ViewController.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
 		EAB512F22747BC5A00586191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */; };
+		EAB512FA2748E41E00586191 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512F92748E41E00586191 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		EAB512EE2747BC5A00586191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAB512F12747BC5A00586191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAB512F32747BC5A00586191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAB512F92748E41E00586191 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				EAB512EE2747BC5A00586191 /* Assets.xcassets */,
 				EAB512F02747BC5A00586191 /* LaunchScreen.storyboard */,
 				EAB512F32747BC5A00586191 /* Info.plist */,
+				EAB512F92748E41E00586191 /* AppCoordinator.swift */,
 			);
 			path = DeezerTest;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAB512FA2748E41E00586191 /* AppCoordinator.swift in Sources */,
 				EAB512EA2747BC5700586191 /* ViewController.swift in Sources */,
 				EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,

@@ -9,8 +9,9 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+	private var appCoordinator: AppCoordinator?
+	
 	var window: UIWindow?
-
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -20,8 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		
 		window = UIWindow(frame: UIScreen.main.bounds)
 		window?.windowScene = scene
-		window?.rootViewController = ViewController()
-		window?.makeKeyAndVisible()
+		
+		startApp()
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {
@@ -52,6 +53,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// to restore the scene back to its current state.
 	}
 
+	// Start point of the app
+	private func startApp() {
+		guard let window = window else {
+			return
+		}
+		
+		appCoordinator = AppCoordinator(window: window)
+		appCoordinator?.start()
+	}
 
 }
 
