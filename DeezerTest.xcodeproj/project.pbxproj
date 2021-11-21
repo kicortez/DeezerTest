@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CDD77AEF9BCBA1A3B5572EC0 /* Pods_DeezerTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D033DB2944776F07F56FF2 /* Pods_DeezerTest.framework */; };
+		EA9831FF274935E3000452DA /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9831FE274935E3000452DA /* APIManager.swift */; };
+		EA983201274936D1000452DA /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA983200274936D1000452DA /* APIService.swift */; };
+		EA983203274A47DD000452DA /* DeezerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA983202274A47DD000452DA /* DeezerService.swift */; };
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
@@ -26,6 +29,9 @@
 		2CE3C04FBE298DF669933E66 /* Pods-DeezerTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeezerTest.release.xcconfig"; path = "Target Support Files/Pods-DeezerTest/Pods-DeezerTest.release.xcconfig"; sourceTree = "<group>"; };
 		31D033DB2944776F07F56FF2 /* Pods_DeezerTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeezerTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CADA2008A2C4C70EC12DE51 /* Pods-DeezerTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeezerTest.debug.xcconfig"; path = "Target Support Files/Pods-DeezerTest/Pods-DeezerTest.debug.xcconfig"; sourceTree = "<group>"; };
+		EA9831FE274935E3000452DA /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		EA983200274936D1000452DA /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		EA983202274A47DD000452DA /* DeezerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeezerService.swift; sourceTree = "<group>"; };
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +66,16 @@
 				31D033DB2944776F07F56FF2 /* Pods_DeezerTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA9831FD274935CD000452DA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EA9831FE274935E3000452DA /* APIManager.swift */,
+				EA983200274936D1000452DA /* APIService.swift */,
+				EA983202274A47DD000452DA /* DeezerService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		EAB512D92747BC5700586191 = {
@@ -141,6 +157,7 @@
 				EAB512F92748E41E00586191 /* AppCoordinator.swift */,
 				EAB5130427492AF100586191 /* Home */,
 				EAB5130B27492C7E00586191 /* Album */,
+				EA9831FD274935CD000452DA /* Network */,
 				EAB5130327492AE600586191 /* Extensions */,
 				EAB5130627492B2D00586191 /* Resources */,
 			);
@@ -170,7 +187,6 @@
 				5CADA2008A2C4C70EC12DE51 /* Pods-DeezerTest.debug.xcconfig */,
 				2CE3C04FBE298DF669933E66 /* Pods-DeezerTest.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -288,15 +304,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA983203274A47DD000452DA /* DeezerService.swift in Sources */,
 				EAB513022748F36600586191 /* UICollectionView+Extensions.swift in Sources */,
 				EAB512FC2748E7DB00586191 /* HomeController.swift in Sources */,
 				EAB5130D27492CCC00586191 /* ArtistAlbumCoordinator.swift in Sources */,
 				EAB512FA2748E41E00586191 /* AppCoordinator.swift in Sources */,
+				EA9831FF274935E3000452DA /* APIManager.swift in Sources */,
 				EAB513002748F32C00586191 /* ArtistsCollectionCell.swift in Sources */,
 				EAB512FE2748E9E100586191 /* UIView+Extensions.swift in Sources */,
 				EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */,
 				EAB5130F27492D6900586191 /* HomeCoordinator.swift in Sources */,
 				EAB5130A27492C7400586191 /* ArtistAlbumsController.swift in Sources */,
+				EA983201274936D1000452DA /* APIService.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
