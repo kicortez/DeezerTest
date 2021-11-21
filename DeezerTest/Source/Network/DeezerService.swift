@@ -10,11 +10,14 @@ import Foundation
 // MARK: - Artists
 enum ArtistService: APIService {
 	
-	case artistInfo(id: String)
-	case artistAlbums(artistId: String)
+	case searchArtist(keyword: String)
+	case artistInfo(id: Int)
+	case artistAlbums(artistId: Int)
 	
 	var path: String {
 		switch self {
+		case .searchArtist:
+			return "/search/artist"
 		case .artistInfo(let id):
 			return "/artist/\(id)"
 		case .artistAlbums(let artistId):
@@ -31,6 +34,8 @@ enum ArtistService: APIService {
 	
 	var parameters: [String : Any]? {
 		switch self {
+		case .searchArtist(let keyword):
+			return ["q": keyword]
 		default:
 			return nil
 		}
