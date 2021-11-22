@@ -11,6 +11,7 @@ import Combine
 class ArtistViewModel {
 	
 	@Published var searchResults: [Artist] = []
+	@Published var artistAlbums: [Album] = []
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
@@ -27,6 +28,17 @@ class ArtistViewModel {
 			})
 			.sink { [weak self] result in
 				self?.searchResults = result
+			}
+			.store(in: &cancellables)
+	}
+	
+	func getArtistAlbums(_ artistId: Int) {
+		artistManager.getArtistAlbums(artistId)
+			.map({
+				return (try? $0.get())?.data ?? []
+			})
+			.sink { [weak self] result in
+				self?.artistAlbums = result
 			}
 			.store(in: &cancellables)
 	}
