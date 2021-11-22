@@ -22,7 +22,7 @@ class ArtistDetailsController: UIViewController {
 	private lazy var collectionView: UICollectionView = {
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
 		
-		collectionView.register(cell: ArtistsCollectionCell.self)
+		collectionView.register(cell: AlbumCollectionCell.self)
 		
 		return collectionView
 	}()
@@ -49,6 +49,7 @@ class ArtistDetailsController: UIViewController {
     }
 	
 	private func setupViews() {
+		title = artist?.name
 		view.backgroundColor = .white
 		
 		setupCollectionView()
@@ -97,11 +98,16 @@ extension ArtistDetailsController {
 		let source = AlbumControllerCollectionDataSource(collectionView: collectionView, cellProvider: {
 			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
 			
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistsCollectionCell.reuseIdentifier, for: indexPath)
-			
-			cell.backgroundColor = .tertiarySystemGroupedBackground
-			
-			return cell
+			switch itemIdentifier {
+			case .album(let album):
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionCell.reuseIdentifier, for: indexPath)
+				
+				if let cell = cell as? AlbumCollectionCell {
+					cell.configure(with: album.title, imageURL: album.coverURL)
+				}
+				
+				return cell
+			}
 		})
 		
 		return source
@@ -123,7 +129,7 @@ extension ArtistDetailsController {
 											  heightDimension: .fractionalHeight(1.0))
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 		
-		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.7))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
 		group.interItemSpacing = .fixed(8.0)
 		

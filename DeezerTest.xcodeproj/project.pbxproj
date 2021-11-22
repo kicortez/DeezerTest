@@ -16,6 +16,7 @@
 		EA98320C274A7380000452DA /* ListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98320B274A7380000452DA /* ListResponse.swift */; };
 		EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98320D274BC573000452DA /* ArtistViewModel.swift */; };
 		EA983211274BE0B9000452DA /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA983210274BE0B9000452DA /* Album.swift */; };
+		EA983213274BE613000452DA /* AlbumCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA983212274BE613000452DA /* AlbumCollectionCell.swift */; };
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		EA98320B274A7380000452DA /* ListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponse.swift; sourceTree = "<group>"; };
 		EA98320D274BC573000452DA /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		EA983210274BE0B9000452DA /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		EA983212274BE613000452DA /* AlbumCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionCell.swift; sourceTree = "<group>"; };
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +54,7 @@
 		EAB512FD2748E9E100586191 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionCell.swift; sourceTree = "<group>"; };
 		EAB513012748F36600586191 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		EAB5130927492C7400586191 /* ArtistDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistDetailsController.swift; path = DeezerTest/Source/Home/Views/ArtistDetailsController.swift; sourceTree = SOURCE_ROOT; };
+		EAB5130927492C7400586191 /* ArtistDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistDetailsController.swift; path = DeezerTest/Source/Home/Views/Controllers/ArtistDetailsController.swift; sourceTree = SOURCE_ROOT; };
 		EAB5130E27492D6900586191 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,24 @@
 				EA98320D274BC573000452DA /* ArtistViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EA983214274BE61B000452DA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */,
+				EA983212274BE613000452DA /* AlbumCollectionCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		EA983215274BE625000452DA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EAB512FB2748E7DA00586191 /* HomeController.swift */,
+				EAB5130927492C7400586191 /* ArtistDetailsController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		EAB512D92747BC5700586191 = {
@@ -155,9 +175,8 @@
 		EAB5130527492B1900586191 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EAB512FB2748E7DA00586191 /* HomeController.swift */,
-				EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */,
-				EAB5130927492C7400586191 /* ArtistDetailsController.swift */,
+				EA983215274BE625000452DA /* Controllers */,
+				EA983214274BE61B000452DA /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -333,6 +352,7 @@
 				EA983201274936D1000452DA /* APIService.swift in Sources */,
 				EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,
+				EA983213274BE613000452DA /* AlbumCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
