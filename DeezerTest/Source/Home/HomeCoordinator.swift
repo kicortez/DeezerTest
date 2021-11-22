@@ -31,7 +31,7 @@ extension HomeCoordinator: HomeControllerDelegate {
 	
 	func homeController(_ controller: HomeController, didSelectArtist artist: Artist) {
 		if let presenter = presenter as? UINavigationController {
-			let albumsController = ArtistAlbumsController.generate(with: artist)
+			let albumsController = ArtistDetailsController.generate(with: artist)
 			presenter.pushViewController(albumsController, animated: true)
 		}
 		

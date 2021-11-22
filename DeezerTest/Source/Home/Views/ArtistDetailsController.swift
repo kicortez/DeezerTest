@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import Combine
 
-internal typealias AlbumControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, Int>
-internal typealias AlbumControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, Int>
+enum ArtistDetailsCollectionDataWrapper: Hashable {
+	case album(album: Album)
+}
 
-class ArtistAlbumsController: UIViewController {
+internal typealias AlbumControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, ArtistDetailsCollectionDataWrapper>
+internal typealias AlbumControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, ArtistDetailsCollectionDataWrapper>
+
+class ArtistDetailsController: UIViewController {
 
 	private lazy var dataSource: AlbumControllerCollectionDataSource = makeDataSource()
 
@@ -23,9 +28,13 @@ class ArtistAlbumsController: UIViewController {
 	}()
 	
 	private var artist: Artist?
+	private var data: [ArtistDetailsCollectionDataWrapper] = []
+	private let artistViewModel: ArtistViewModel = ArtistViewModel()
 	
-	static func generate(with artist: Artist) -> ArtistAlbumsController {
-		let controller = ArtistAlbumsController()
+	private var cancellables: Set<AnyCancellable> = Set()
+	
+	static func generate(with artist: Artist) -> ArtistDetailsController {
+		let controller = ArtistDetailsController()
 		controller.artist = artist
 		
 		return controller
@@ -35,7 +44,8 @@ class ArtistAlbumsController: UIViewController {
         super.viewDidLoad()
 
 		setupViews()
-		applySnapshot()
+		setupSubscribers()
+		fetchArtistAlbums()
     }
 	
 	private func setupViews() {
@@ -55,15 +65,33 @@ class ArtistAlbumsController: UIViewController {
 		
 		// Dummy
 		snapshot.appendSections([1])
-		snapshot.appendItems([1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,18,19,20])
+		snapshot.appendItems(data)
 		
 		dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+	}
+	
+	private func setupSubscribers() {
+		artistViewModel
+			.$artistAlbums
+			.sink { [weak self] albums in
+				self?.data = albums.map({ .album(album: $0) })
+				self?.applySnapshot()
+			}
+			.store(in: &cancellables)
+	}
+	
+	private func fetchArtistAlbums() {
+		guard let artist = artist else {
+			return
+		}
+
+		artistViewModel.getArtistAlbums(artist.id)
 	}
     
 }
 
 // MARK: - UICollectionView setup
-extension ArtistAlbumsController {
+extension ArtistDetailsController {
 	
 	private func makeDataSource() -> AlbumControllerCollectionDataSource {
 		let source = AlbumControllerCollectionDataSource(collectionView: collectionView, cellProvider: {

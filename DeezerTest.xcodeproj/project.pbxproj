@@ -25,7 +25,7 @@
 		EAB512FE2748E9E100586191 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512FD2748E9E100586191 /* UIView+Extensions.swift */; };
 		EAB513002748F32C00586191 /* ArtistsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */; };
 		EAB513022748F36600586191 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB513012748F36600586191 /* UICollectionView+Extensions.swift */; };
-		EAB5130A27492C7400586191 /* ArtistAlbumsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5130927492C7400586191 /* ArtistAlbumsController.swift */; };
+		EAB5130A27492C7400586191 /* ArtistDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5130927492C7400586191 /* ArtistDetailsController.swift */; };
 		EAB5130F27492D6900586191 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB5130E27492D6900586191 /* HomeCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +52,7 @@
 		EAB512FD2748E9E100586191 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionCell.swift; sourceTree = "<group>"; };
 		EAB513012748F36600586191 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
-		EAB5130927492C7400586191 /* ArtistAlbumsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistAlbumsController.swift; path = DeezerTest/Source/Home/Views/ArtistAlbumsController.swift; sourceTree = SOURCE_ROOT; };
+		EAB5130927492C7400586191 /* ArtistDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtistDetailsController.swift; path = DeezerTest/Source/Home/Views/ArtistDetailsController.swift; sourceTree = SOURCE_ROOT; };
 		EAB5130E27492D6900586191 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,7 +157,7 @@
 			children = (
 				EAB512FB2748E7DA00586191 /* HomeController.swift */,
 				EAB512FF2748F32C00586191 /* ArtistsCollectionCell.swift */,
-				EAB5130927492C7400586191 /* ArtistAlbumsController.swift */,
+				EAB5130927492C7400586191 /* ArtistDetailsController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 				EAB512FE2748E9E100586191 /* UIView+Extensions.swift in Sources */,
 				EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */,
 				EAB5130F27492D6900586191 /* HomeCoordinator.swift in Sources */,
-				EAB5130A27492C7400586191 /* ArtistAlbumsController.swift in Sources */,
+				EAB5130A27492C7400586191 /* ArtistDetailsController.swift in Sources */,
 				EA983201274936D1000452DA /* APIService.swift in Sources */,
 				EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,

@@ -17,3 +17,5 @@ struct Album: Decodable {
 		case coverURL = "cover_big"
 	}
 }
+
+extension Album: Equatable, Hashable {}
