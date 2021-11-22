@@ -17,7 +17,7 @@ internal typealias HomeControllerCollectionSnapshot = NSDiffableDataSourceSnapsh
 
 protocol HomeControllerDelegate: AnyObject {
 	// Dummy
-	func homeController(_ controller: HomeController, didSelectArtist artist: Int)
+	func homeController(_ controller: HomeController, didSelectArtist artist: Artist)
 }
 
 class HomeController: UIViewController {
@@ -165,7 +165,12 @@ extension HomeController {
 extension HomeController: UICollectionViewDelegate {
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		delegate?.homeController(self, didSelectArtist: indexPath.item)
+		guard let dataWrapper = dataSource.itemIdentifier(for: indexPath) else { return }
+		
+		switch dataWrapper {
+		case .artist(let artist):
+			delegate?.homeController(self, didSelectArtist: artist)
+		}
 	}
 	
 }

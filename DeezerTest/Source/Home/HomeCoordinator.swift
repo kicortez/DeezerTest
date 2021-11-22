@@ -11,7 +11,6 @@ import UIKit
 class HomeCoordinator {
 	
 	private weak var presenter: UIViewController?
-	private var albumsCoordinator: ArtistAlbumCoordinator?
 	
 	init(presenter: UINavigationController) {
 		self.presenter = presenter
@@ -30,12 +29,10 @@ class HomeCoordinator {
 
 extension HomeCoordinator: HomeControllerDelegate {
 	
-	func homeController(_ controller: HomeController, didSelectArtist artist: Int) {
+	func homeController(_ controller: HomeController, didSelectArtist artist: Artist) {
 		if let presenter = presenter as? UINavigationController {
-			let coordinator = ArtistAlbumCoordinator(presenter: presenter)
-			coordinator.start()
-		
-			albumsCoordinator = coordinator
+			let albumsController = ArtistAlbumsController.generate(with: artist)
+			presenter.pushViewController(albumsController, animated: true)
 		}
 		
 	}

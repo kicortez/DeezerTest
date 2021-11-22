@@ -22,6 +22,15 @@ class ArtistAlbumsController: UIViewController {
 		return collectionView
 	}()
 	
+	private var artist: Artist?
+	
+	static func generate(with artist: Artist) -> ArtistAlbumsController {
+		let controller = ArtistAlbumsController()
+		controller.artist = artist
+		
+		return controller
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
