@@ -38,6 +38,8 @@ class HomeController: UIViewController {
 	
 	private var data: [HomeControllerCollectionDataWrapper] = []
 	
+	private var cancellables: Set<AnyCancellable> = Set()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -60,6 +62,17 @@ class HomeController: UIViewController {
 		definesPresentationContext = true
 		
 		navigationItem.titleView = searchController.searchBar
+		
+		NotificationCenter.default.publisher(for: UISearchTextField.textDidChangeNotification, object: searchController.searchBar.searchTextField)
+			.map({
+				($0.object as! UISearchTextField).text!
+			})
+			.debounce(for: .milliseconds(300), scheduler: RunLoop.main, options: nil)
+			.removeDuplicates()
+			.sink { [weak self] in
+				self?.searchText($0)
+			}
+			.store(in: &cancellables)
 	}
 	
 	private func setupCollectionView() {
@@ -76,6 +89,10 @@ class HomeController: UIViewController {
 		snapshot.appendItems(data)
 		
 		dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+	}
+	
+	private func searchText(_ searchText: String) {
+		print(searchText)
 	}
 
 }
