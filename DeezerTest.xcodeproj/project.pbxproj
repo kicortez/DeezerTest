@@ -14,6 +14,7 @@
 		EA983206274A6E78000452DA /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA983205274A6E78000452DA /* Artist.swift */; };
 		EA98320A274A725E000452DA /* ArtistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA983209274A725E000452DA /* ArtistManager.swift */; };
 		EA98320C274A7380000452DA /* ListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98320B274A7380000452DA /* ListResponse.swift */; };
+		EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98320D274BC573000452DA /* ArtistViewModel.swift */; };
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		EA983205274A6E78000452DA /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		EA983209274A725E000452DA /* ArtistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistManager.swift; sourceTree = "<group>"; };
 		EA98320B274A7380000452DA /* ListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponse.swift; sourceTree = "<group>"; };
+		EA98320D274BC573000452DA /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		EA98320F274BC57C000452DA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EA98320D274BC573000452DA /* ArtistViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		EAB512D92747BC5700586191 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +144,7 @@
 			children = (
 				EA983204274A6E64000452DA /* Models */,
 				EAB5130527492B1900586191 /* Views */,
+				EA98320F274BC57C000452DA /* ViewModels */,
 				EAB5130E27492D6900586191 /* HomeCoordinator.swift */,
 				EA983209274A725E000452DA /* ArtistManager.swift */,
 			);
@@ -336,6 +347,7 @@
 				EAB5130F27492D6900586191 /* HomeCoordinator.swift in Sources */,
 				EAB5130A27492C7400586191 /* ArtistAlbumsController.swift in Sources */,
 				EA983201274936D1000452DA /* APIService.swift in Sources */,
+				EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
