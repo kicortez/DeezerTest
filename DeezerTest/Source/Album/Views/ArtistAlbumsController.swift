@@ -12,7 +12,7 @@ internal typealias AlbumControllerCollectionSnapshot = NSDiffableDataSourceSnaps
 
 class ArtistAlbumsController: UIViewController {
 
-	private lazy var dataSource: HomeControllerCollectionDataSource = makeDataSource()
+	private lazy var dataSource: AlbumControllerCollectionDataSource = makeDataSource()
 
 	private lazy var collectionView: UICollectionView = {
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
@@ -42,7 +42,7 @@ class ArtistAlbumsController: UIViewController {
 	}
 	
 	private func applySnapshot() {
-		var snapshot = HomeControllerCollectionSnapshot()
+		var snapshot = AlbumControllerCollectionSnapshot()
 		
 		// Dummy
 		snapshot.appendSections([1])

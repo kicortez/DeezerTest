@@ -18,3 +18,5 @@ struct Artist: Decodable {
 		case imageURL = "picture_big"
 	}
 }
+
+extension Artist: Equatable, Hashable {}

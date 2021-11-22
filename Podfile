@@ -5,6 +5,11 @@ target 'DeezerTest' do
   use_frameworks!
 
   # Pods for DeezerTest
+	
+	# Network
   pod 'Alamofire', '~> 5.4'
 
+	# Utils
+	pod 'Kingfisher', '~> 7.0'
+	
 end

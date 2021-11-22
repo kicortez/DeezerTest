@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import Combine
 
-internal typealias HomeControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, Int>
-internal typealias HomeControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, Int>
+enum HomeControllerCollectionDataWrapper: Hashable {
+	case artist(artist: Artist)
+}
+
+internal typealias HomeControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, HomeControllerCollectionDataWrapper>
+internal typealias HomeControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, HomeControllerCollectionDataWrapper>
 
 protocol HomeControllerDelegate: AnyObject {
 	// Dummy
@@ -30,6 +35,8 @@ class HomeController: UIViewController {
 	}()
 	
 	weak var delegate: HomeControllerDelegate?
+	
+	private var data: [HomeControllerCollectionDataWrapper] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,9 +72,8 @@ class HomeController: UIViewController {
 	private func applySnapshot() {
 		var snapshot = HomeControllerCollectionSnapshot()
 		
-		// Dummy
 		snapshot.appendSections([1])
-		snapshot.appendItems([1,2,3,4,5])
+		snapshot.appendItems(data)
 		
 		dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
 	}
@@ -81,11 +87,16 @@ extension HomeController {
 		let source = HomeControllerCollectionDataSource(collectionView: collectionView, cellProvider: {
 			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
 			
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistsCollectionCell.reuseIdentifier, for: indexPath)
-			
-			cell.backgroundColor = .tertiarySystemGroupedBackground
-			
-			return cell
+			switch itemIdentifier {
+			case .artist(let artist):
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistsCollectionCell.reuseIdentifier, for: indexPath)
+				
+				if let cell = cell as? ArtistsCollectionCell {
+					cell.configure(with: artist.name, imageURL: artist.imageURL)
+				}
+				
+				return cell
+			}
 		})
 		
 		return source
@@ -107,7 +118,7 @@ extension HomeController {
 											  heightDimension: .fractionalHeight(1.0))
 		let item = NSCollectionLayoutItem(layoutSize: itemSize)
 		
-		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80.0))
+		let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(58.0))
 		let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 		
 		let section = NSCollectionLayoutSection(group: group)
