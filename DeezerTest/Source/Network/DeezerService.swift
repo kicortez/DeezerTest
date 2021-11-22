@@ -52,8 +52,8 @@ enum ArtistService: APIService {
 // MARK: - Albums
 enum AlbumService: APIService {
 	
-	case albumInfo(id: String)
-	case albumTracks(albumId: String)
+	case albumInfo(id: Int)
+	case albumTracks(albumId: Int)
 	
 	var path: String {
 		switch self {
