@@ -6,72 +6,43 @@
 //
 
 import Foundation
+import Combine
 
 // DataAccessAPI protocol is mainly used as access data, from any source
 
-protocol ArtistDataAccessAPI: AnyObject {
-	func searchArtist(keyword: String, completion: @escaping (Result<ListResponse<Artist>, Error>)->Void)
-	func getArtistInfo(_ artistId: Int, completion: @escaping (Result<Artist, Error>)->Void)
+protocol ArtistDataAccessProtocol: AnyObject {
+	func searchArtist(keyword: String) -> AnyPublisher<Result<ListResponse<Artist>, Error>, Never>
+	func getArtistInfo(_ artistId: Int) -> AnyPublisher<Result<Artist, Error>, Never>
 }
 
 // This class conforms to ArtistDataAccessAPI, and it's implementation accesses artist related content from a server
-class ArtistDataAccessor: ArtistDataAccessAPI {
+class ArtistDataAccessAPI: ArtistDataAccessProtocol {
 	
-	func searchArtist(keyword: String, completion: @escaping (Result<ListResponse<Artist>, Error>) -> Void) {
-		AFAPIManager.request(ArtistService.searchArtist(keyword: keyword)) { result in
-			switch result {
-			case .success(let data):
-				let decoder = JSONDecoder()
-				
-				do {
-					let searchResults = try decoder.decode(ListResponse<Artist>.self, from: data)
-					completion(.success(searchResults))
-				}
-				catch {
-					completion(.failure(error))
-				}
-			case .failure(let error):
-				completion(.failure(error))
-			}
-		}
+	func searchArtist(keyword: String) -> AnyPublisher<Result<ListResponse<Artist>, Error>, Never> {
+		return AFAPIManager.request(ArtistService.searchArtist(keyword: keyword))
 	}
 	
-	func getArtistInfo(_ artistId: Int, completion: @escaping (Result<Artist, Error>) -> Void) {
-		AFAPIManager.request(ArtistService.artistInfo(id: artistId)) { result in
-			switch result {
-			case .success(let data):
-				let decoder = JSONDecoder()
-				
-				do {
-					let artist = try decoder.decode(Artist.self, from: data)
-					completion(.success(artist))
-				}
-				catch {
-					completion(.failure(error))
-				}
-			case .failure(let error):
-				completion(.failure(error))
-			}
-		}
+	func getArtistInfo(_ artistId: Int) -> AnyPublisher<Result<Artist, Error>, Never> {
+		return AFAPIManager.request(ArtistService.artistInfo(id: artistId))
 	}
 	
 }
 
 class ArtistManager {
 	
-	private var dataAccessor: ArtistDataAccessAPI?
+	private var dataAccessor: ArtistDataAccessProtocol!
 	
 	// Allows injection as needed, for instance, if you want to access data from local storage
-	init(dataAccessor: ArtistDataAccessAPI = ArtistDataAccessor()) {
+	init(dataAccessor: ArtistDataAccessProtocol = ArtistDataAccessAPI()) {
 		self.dataAccessor = dataAccessor
 	}
 	
-	func searchArtist(keyword: String, completion: @escaping (Result<ListResponse<Artist>, Error>)->Void) {
-		dataAccessor?.searchArtist(keyword: keyword, completion: completion)
+	func searchArtist(keyword: String) -> AnyPublisher<Result<ListResponse<Artist>, Error>, Never> {
+		return dataAccessor.searchArtist(keyword: keyword)
 	}
 	
-	func getArtistInfo(_ artistId: Int, completion: @escaping (Result<Artist, Error>)->Void) {
-		dataAccessor?.getArtistInfo(artistId, completion: completion)
+	func getArtistInfo(_ artistId: Int) -> AnyPublisher<Result<Artist, Error>, Never> {
+		return dataAccessor.getArtistInfo(artistId)
 	}
 	
 }
