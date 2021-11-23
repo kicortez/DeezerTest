@@ -17,8 +17,6 @@ internal typealias AlbumDetailsCollectionDataSource = UICollectionViewDiffableDa
 internal typealias AlbumDetailsCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, AlbumDetailsCollectionDataWrapper>
 
 class AlbumDetailsController: UIViewController {
-
-	private var album: Album?
 	
 	private lazy var dataSource: AlbumDetailsCollectionDataSource = makeDataSource()
 
@@ -48,13 +46,13 @@ class AlbumDetailsController: UIViewController {
 	weak var delegate: HomeControllerDelegate?
 	
 	private var data: [AlbumDetailsCollectionDataWrapper] = []
-	private let albumViewModel: AlbumViewModel = AlbumViewModel()
+	private var albumViewModel: AlbumViewModel = AlbumViewModel()
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
-	static func generate(with album: Album) -> AlbumDetailsController {
+	static func generate(with albumViewModel: AlbumViewModel) -> AlbumDetailsController {
 		let controller = AlbumDetailsController()
-		controller.album = album
+		controller.albumViewModel = albumViewModel
 		
 		return controller
 	}
@@ -64,7 +62,8 @@ class AlbumDetailsController: UIViewController {
 		
 		setupViews()
 		setupSubscribers()
-		fetchAlbumTracks()
+		
+		albumViewModel.getAlbumTracks()
 	}
 	
 	private func setupViews() {
@@ -109,9 +108,6 @@ class AlbumDetailsController: UIViewController {
 			albumImageView.heightAnchor.constraint(equalToConstant: 100),
 			albumImageView.widthAnchor.constraint(equalToConstant: 100),
 		])
-		
-		titleLabel.text = album?.title
-		albumImageView.kf.setImage(with: album?.coverURL)
 	}
 	
 	private func setupSubscribers() {
@@ -120,6 +116,14 @@ class AlbumDetailsController: UIViewController {
 			.sink { [weak self] tracks in
 				self?.data = tracks.map({ .track(track: $0) })
 				self?.applySnapshot()
+			}
+			.store(in: &cancellables)
+		
+		albumViewModel
+			.$album
+			.sink { [weak self] album in
+				self?.titleLabel.text = album?.title
+				self?.albumImageView.kf.setImage(with: album?.coverURL)
 			}
 			.store(in: &cancellables)
 	}
@@ -131,14 +135,6 @@ class AlbumDetailsController: UIViewController {
 		snapshot.appendItems(data)
 		
 		dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
-	}
-	
-	private func fetchAlbumTracks() {
-		guard let album = album else {
-			return
-		}
-
-		albumViewModel.getAlbumTracks(album.id)
 	}
 
 }
