@@ -11,7 +11,7 @@ import Combine
 class AlbumViewModel {
 
 	@Published var album: Album?
-	@Published var tracklist: [Track] = []
+	@Published var tracksData: [AlbumDetailsCollectionDataWrapper] = []
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
@@ -23,7 +23,7 @@ class AlbumViewModel {
 	
 	func getAlbumTracks() {
 		guard let albumId = album?.id else {
-			tracklist = []
+			tracksData = []
 			return
 		}
 		
@@ -32,7 +32,7 @@ class AlbumViewModel {
 				return (try? $0.get())?.data ?? []
 			})
 			.sink { [weak self] result in
-				self?.tracklist = result
+				self?.tracksData = result.map({ .track(track: $0) })
 			}
 			.store(in: &cancellables)
 	}

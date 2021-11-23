@@ -9,13 +9,6 @@ import UIKit
 import Combine
 import Kingfisher
 
-enum AlbumDetailsCollectionDataWrapper: Hashable {
-	case track(track: Track)
-}
-
-internal typealias AlbumDetailsCollectionDataSource = UICollectionViewDiffableDataSource<Int, AlbumDetailsCollectionDataWrapper>
-internal typealias AlbumDetailsCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, AlbumDetailsCollectionDataWrapper>
-
 class AlbumDetailsController: UIViewController {
 	
 	private lazy var dataSource: AlbumDetailsCollectionDataSource = makeDataSource()
@@ -45,7 +38,6 @@ class AlbumDetailsController: UIViewController {
 	
 	weak var delegate: HomeControllerDelegate?
 	
-	private var data: [AlbumDetailsCollectionDataWrapper] = []
 	private var albumViewModel: AlbumViewModel = AlbumViewModel()
 	
 	private var cancellables: Set<AnyCancellable> = Set()
@@ -112,10 +104,9 @@ class AlbumDetailsController: UIViewController {
 	
 	private func setupSubscribers() {
 		albumViewModel
-			.$tracklist
+			.$tracksData
 			.sink { [weak self] tracks in
-				self?.data = tracks.map({ .track(track: $0) })
-				self?.applySnapshot()
+				self?.applySnapshot(data: tracks)
 			}
 			.store(in: &cancellables)
 		
@@ -131,7 +122,7 @@ class AlbumDetailsController: UIViewController {
 			.store(in: &cancellables)
 	}
 	
-	private func applySnapshot() {
+	private func applySnapshot(data: [AlbumDetailsCollectionDataWrapper]) {
 		var snapshot = AlbumDetailsCollectionSnapshot()
 		
 		snapshot.appendSections([1])
@@ -146,19 +137,9 @@ class AlbumDetailsController: UIViewController {
 extension AlbumDetailsController {
 	
 	private func makeDataSource() -> AlbumDetailsCollectionDataSource {
-		let source = AlbumDetailsCollectionDataSource(collectionView: collectionView, cellProvider: {
-			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+		let source = AlbumDetailsCollectionDataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
 			
-			switch itemIdentifier {
-			case .track(let track):
-				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackCollectionCell.reuseIdentifier, for: indexPath)
-				
-				if let cell = cell as? TrackCollectionCell {
-					cell.configure(with: track.title)
-				}
-				
-				return cell
-			}
+			self?.albumViewModel.collectionViewCell(collectionView, atIndexPath: indexPath, forItemWithIdentifier: itemIdentifier)
 		})
 		
 		return source
