@@ -33,15 +33,14 @@ class ArtistDetailsController: UIViewController {
 	
 	weak var delegate: ArtistDetailsControllerDelegate?
 	
-	private var artist: Artist?
 	private var data: [ArtistDetailsCollectionDataWrapper] = []
-	private let artistViewModel: ArtistViewModel = ArtistViewModel()
+	private var artistViewModel: ArtistViewModel = ArtistViewModel()
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
-	static func generate(with artist: Artist) -> ArtistDetailsController {
+	static func generate(with artistViewModel: ArtistViewModel) -> ArtistDetailsController {
 		let controller = ArtistDetailsController()
-		controller.artist = artist
+		controller.artistViewModel = artistViewModel
 		
 		return controller
 	}
@@ -51,12 +50,12 @@ class ArtistDetailsController: UIViewController {
 
 		setupViews()
 		setupSubscribers()
-		fetchArtistAlbums()
+		
+		artistViewModel.getArtistAlbums()
     }
 	
 	private func setupViews() {
-		title = artist?.name
-		view.backgroundColor = .white
+		view.backgroundColor = .systemBackground
 		
 		setupCollectionView()
 	}
@@ -87,14 +86,12 @@ class ArtistDetailsController: UIViewController {
 				self?.applySnapshot()
 			}
 			.store(in: &cancellables)
-	}
-	
-	private func fetchArtistAlbums() {
-		guard let artist = artist else {
-			return
-		}
-
-		artistViewModel.getArtistAlbums(artist.id)
+		
+		artistViewModel
+			.$artist
+			.sink { [weak self] artist in
+				self?.title = artist?.name
+			}
 	}
     
 }

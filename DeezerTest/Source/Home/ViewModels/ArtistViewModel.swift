@@ -10,6 +10,7 @@ import Combine
 
 class ArtistViewModel {
 	
+	@Published var artist: Artist?
 	@Published var searchResults: [Artist] = []
 	@Published var artistAlbums: [Album] = []
 	
@@ -32,7 +33,12 @@ class ArtistViewModel {
 			.store(in: &cancellables)
 	}
 	
-	func getArtistAlbums(_ artistId: Int) {
+	func getArtistAlbums() {
+		guard let artistId = artist?.id else {
+			artistAlbums = []
+			return
+		}
+
 		artistManager.getArtistAlbums(artistId)
 			.map({
 				return (try? $0.get())?.data ?? []
