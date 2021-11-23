@@ -20,6 +20,7 @@
 		EAA1E342274BF4DA00195456 /* AlbumDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E341274BF4DA00195456 /* AlbumDetailsController.swift */; };
 		EAA1E344274BF51400195456 /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E343274BF51400195456 /* AlbumManager.swift */; };
 		EAA1E346274BF63500195456 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E345274BF63500195456 /* Track.swift */; };
+		EAA1E348274C828F00195456 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E347274C828F00195456 /* AlbumViewModel.swift */; };
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		EAA1E341274BF4DA00195456 /* AlbumDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsController.swift; sourceTree = "<group>"; };
 		EAA1E343274BF51400195456 /* AlbumManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
 		EAA1E345274BF63500195456 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		EAA1E347274C828F00195456 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				EA98320D274BC573000452DA /* ArtistViewModel.swift */,
+				EAA1E347274C828F00195456 /* AlbumViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,
 				EA983213274BE613000452DA /* AlbumCollectionCell.swift in Sources */,
+				EAA1E348274C828F00195456 /* AlbumViewModel.swift in Sources */,
 				EAA1E346274BF63500195456 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

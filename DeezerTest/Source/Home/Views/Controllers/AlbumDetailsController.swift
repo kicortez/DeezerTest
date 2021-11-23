@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum AlbumDetailsCollectionDataWrapper: Hashable {
 	case track(track: Track)
@@ -29,6 +30,9 @@ class AlbumDetailsController: UIViewController {
 	weak var delegate: HomeControllerDelegate?
 	
 	private var data: [AlbumDetailsCollectionDataWrapper] = []
+	private let albumViewModel: AlbumViewModel = AlbumViewModel()
+	
+	private var cancellables: Set<AnyCancellable> = Set()
 	
 	static func generate(with album: Album) -> AlbumDetailsController {
 		let controller = AlbumDetailsController()
@@ -41,7 +45,8 @@ class AlbumDetailsController: UIViewController {
 		super.viewDidLoad()
 		
 		setupViews()
-		applySnapshot()
+		setupSubscribers()
+		fetchAlbumTracks()
 	}
 	
 	private func setupViews() {
@@ -56,6 +61,17 @@ class AlbumDetailsController: UIViewController {
 		view.pin(collectionView)
 	}
 	
+	private func setupSubscribers() {
+		albumViewModel
+			.$tracklist
+			.sink { [weak self] tracks in
+				print(tracks)
+				self?.data = tracks.map({ .track(track: $0) })
+				self?.applySnapshot()
+			}
+			.store(in: &cancellables)
+	}
+	
 	private func applySnapshot() {
 		var snapshot = AlbumDetailsCollectionSnapshot()
 		
@@ -63,6 +79,14 @@ class AlbumDetailsController: UIViewController {
 		snapshot.appendItems(data)
 		
 		dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+	}
+	
+	private func fetchAlbumTracks() {
+		guard let album = album else {
+			return
+		}
+
+		albumViewModel.getAlbumTracks(album.id)
 	}
 
 }
