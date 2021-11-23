@@ -24,6 +24,8 @@ class AlbumDetailsController: UIViewController {
 	private lazy var collectionView: UICollectionView = {
 		let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout())
 		
+		collectionView.register(cell: TrackCollectionCell.self)
+		
 		return collectionView
 	}()
 	
@@ -65,7 +67,6 @@ class AlbumDetailsController: UIViewController {
 		albumViewModel
 			.$tracklist
 			.sink { [weak self] tracks in
-				print(tracks)
 				self?.data = tracks.map({ .track(track: $0) })
 				self?.applySnapshot()
 			}
@@ -98,7 +99,16 @@ extension AlbumDetailsController {
 		let source = AlbumDetailsCollectionDataSource(collectionView: collectionView, cellProvider: {
 			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
 			
-			return nil
+			switch itemIdentifier {
+			case .track(let track):
+				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackCollectionCell.reuseIdentifier, for: indexPath)
+				
+				if let cell = cell as? TrackCollectionCell {
+					cell.configure(with: track.title)
+				}
+				
+				return cell
+			}
 		})
 		
 		return source
