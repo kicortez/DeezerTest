@@ -7,17 +7,9 @@
 
 import UIKit
 import Combine
-
-enum AlbumDetailsCollectionDataWrapper: Hashable {
-	case track(track: Track)
-}
-
-internal typealias AlbumDetailsCollectionDataSource = UICollectionViewDiffableDataSource<Int, AlbumDetailsCollectionDataWrapper>
-internal typealias AlbumDetailsCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, AlbumDetailsCollectionDataWrapper>
+import Kingfisher
 
 class AlbumDetailsController: UIViewController {
-
-	private var album: Album?
 	
 	private lazy var dataSource: AlbumDetailsCollectionDataSource = makeDataSource()
 
@@ -29,16 +21,30 @@ class AlbumDetailsController: UIViewController {
 		return collectionView
 	}()
 	
+	private lazy var titleLabel: UILabel = {
+		let label = UILabel()
+		return label
+	}()
+	
+	private lazy var releaseDateLabel: UILabel = {
+		let label = UILabel()
+		return label
+	}()
+	
+	private lazy var albumImageView: UIImageView = {
+		let imageView = UIImageView()
+		return imageView
+	}()
+	
 	weak var delegate: HomeControllerDelegate?
 	
-	private var data: [AlbumDetailsCollectionDataWrapper] = []
-	private let albumViewModel: AlbumViewModel = AlbumViewModel()
+	private var albumViewModel: AlbumViewModel = AlbumViewModel()
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
-	static func generate(with album: Album) -> AlbumDetailsController {
+	static func generate(with albumViewModel: AlbumViewModel) -> AlbumDetailsController {
 		let controller = AlbumDetailsController()
-		controller.album = album
+		controller.albumViewModel = albumViewModel
 		
 		return controller
 	}
@@ -48,46 +54,81 @@ class AlbumDetailsController: UIViewController {
 		
 		setupViews()
 		setupSubscribers()
-		fetchAlbumTracks()
+		
+		albumViewModel.getAlbumTracks()
 	}
 	
 	private func setupViews() {
-		view.backgroundColor = .white
+		view.backgroundColor = .systemBackground
 		
-		setupCollectionView()
-	}
-	
-	private func setupCollectionView() {
+		let mainStackView = UIStackView()
+		mainStackView.axis = .vertical
+		mainStackView.spacing = 8.0
+		
+		let topStackView = UIStackView()
+		topStackView.axis = .horizontal
+		topStackView.spacing = 8.0
+		
+		let labelStackView = UIStackView()
+		labelStackView.axis = .vertical
+		labelStackView.spacing = 8.0
+		
+		labelStackView.addArrangedSubview(titleLabel)
+		labelStackView.addArrangedSubview(releaseDateLabel)
+		titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+		
+		topStackView.addArrangedSubview(albumImageView)
+		topStackView.addArrangedSubview(labelStackView)
+		
+		mainStackView.addArrangedSubview(topStackView)
+		mainStackView.addArrangedSubview(collectionView)
+		
+		view.addSubview(mainStackView)
+		
+		mainStackView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		view.addSubview(collectionView)
-		view.pin(collectionView)
+		albumImageView.translatesAutoresizingMaskIntoConstraints = false
+		titleLabel.translatesAutoresizingMaskIntoConstraints = false
+		releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint.activate([
+			mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+			view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+			view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: mainStackView.bottomAnchor),
+			
+			albumImageView.heightAnchor.constraint(equalToConstant: 100),
+			albumImageView.widthAnchor.constraint(equalToConstant: 100),
+		])
 	}
 	
 	private func setupSubscribers() {
 		albumViewModel
-			.$tracklist
+			.$tracksData
 			.sink { [weak self] tracks in
-				self?.data = tracks.map({ .track(track: $0) })
-				self?.applySnapshot()
+				self?.applySnapshot(data: tracks)
+			}
+			.store(in: &cancellables)
+		
+		albumViewModel
+			.$album
+			.compactMap({ $0 })
+			.map({ AlbumUIModel(with: $0) })
+			.sink { [weak self] album in
+				self?.titleLabel.text = album.title
+				self?.albumImageView.kf.setImage(with: album.coverURL)
+				self?.releaseDateLabel.text = album.releaseDate
 			}
 			.store(in: &cancellables)
 	}
 	
-	private func applySnapshot() {
+	private func applySnapshot(data: [AlbumDetailsCollectionDataWrapper]) {
 		var snapshot = AlbumDetailsCollectionSnapshot()
 		
 		snapshot.appendSections([1])
 		snapshot.appendItems(data)
 		
 		dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
-	}
-	
-	private func fetchAlbumTracks() {
-		guard let album = album else {
-			return
-		}
-
-		albumViewModel.getAlbumTracks(album.id)
 	}
 
 }
@@ -96,19 +137,9 @@ class AlbumDetailsController: UIViewController {
 extension AlbumDetailsController {
 	
 	private func makeDataSource() -> AlbumDetailsCollectionDataSource {
-		let source = AlbumDetailsCollectionDataSource(collectionView: collectionView, cellProvider: {
-			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+		let source = AlbumDetailsCollectionDataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
 			
-			switch itemIdentifier {
-			case .track(let track):
-				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackCollectionCell.reuseIdentifier, for: indexPath)
-				
-				if let cell = cell as? TrackCollectionCell {
-					cell.configure(with: track.title)
-				}
-				
-				return cell
-			}
+			self?.albumViewModel.collectionViewCell(collectionView, atIndexPath: indexPath, forItemWithIdentifier: itemIdentifier)
 		})
 		
 		return source

@@ -8,15 +8,8 @@
 import UIKit
 import Combine
 
-enum ArtistDetailsCollectionDataWrapper: Hashable {
-	case album(album: Album)
-}
-
-internal typealias AlbumControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, ArtistDetailsCollectionDataWrapper>
-internal typealias AlbumControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, ArtistDetailsCollectionDataWrapper>
-
 protocol ArtistDetailsControllerDelegate: AnyObject {
-	func artistDetailsController(_ controller: ArtistDetailsController, didSelectAlbum album: Album)
+	func artistDetailsController(_ controller: ArtistDetailsController, didSelectAlbum album: AlbumViewModel)
 }
 
 class ArtistDetailsController: UIViewController {
@@ -33,15 +26,13 @@ class ArtistDetailsController: UIViewController {
 	
 	weak var delegate: ArtistDetailsControllerDelegate?
 	
-	private var artist: Artist?
-	private var data: [ArtistDetailsCollectionDataWrapper] = []
-	private let artistViewModel: ArtistViewModel = ArtistViewModel()
+	private var artistViewModel: ArtistViewModel = ArtistViewModel()
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
-	static func generate(with artist: Artist) -> ArtistDetailsController {
+	static func generate(with artistViewModel: ArtistViewModel) -> ArtistDetailsController {
 		let controller = ArtistDetailsController()
-		controller.artist = artist
+		controller.artistViewModel = artistViewModel
 		
 		return controller
 	}
@@ -51,12 +42,12 @@ class ArtistDetailsController: UIViewController {
 
 		setupViews()
 		setupSubscribers()
-		fetchArtistAlbums()
+		
+		artistViewModel.getArtistAlbums()
     }
 	
 	private func setupViews() {
-		title = artist?.name
-		view.backgroundColor = .white
+		view.backgroundColor = .systemBackground
 		
 		setupCollectionView()
 	}
@@ -69,10 +60,9 @@ class ArtistDetailsController: UIViewController {
 		view.pin(collectionView)
 	}
 	
-	private func applySnapshot() {
+	private func applySnapshot(data: [ArtistDetailsCollectionDataWrapper]) {
 		var snapshot = AlbumControllerCollectionSnapshot()
 		
-		// Dummy
 		snapshot.appendSections([1])
 		snapshot.appendItems(data)
 		
@@ -81,20 +71,28 @@ class ArtistDetailsController: UIViewController {
 	
 	private func setupSubscribers() {
 		artistViewModel
-			.$artistAlbums
-			.sink { [weak self] albums in
-				self?.data = albums.map({ .album(album: $0) })
-				self?.applySnapshot()
+			.$artist
+			.map({ $0?.name })
+			.sink { [weak self] name in
+				self?.title = name
 			}
 			.store(in: &cancellables)
-	}
-	
-	private func fetchArtistAlbums() {
-		guard let artist = artist else {
-			return
-		}
-
-		artistViewModel.getArtistAlbums(artist.id)
+		
+		artistViewModel
+			.$collectionData
+			.sink { [weak self] data in
+				self?.applySnapshot(data: data)
+			}
+			.store(in: &cancellables)
+		
+		artistViewModel
+			.$selectedAlbumViewModel
+			.compactMap({ $0 })
+			.sink { [weak self] albumViewModel in
+				guard let self = self else { return }
+				self.delegate?.artistDetailsController(self, didSelectAlbum: albumViewModel)
+			}
+			.store(in: &cancellables)
 	}
     
 }
@@ -103,19 +101,10 @@ class ArtistDetailsController: UIViewController {
 extension ArtistDetailsController {
 	
 	private func makeDataSource() -> AlbumControllerCollectionDataSource {
-		let source = AlbumControllerCollectionDataSource(collectionView: collectionView, cellProvider: {
-			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+		let source = AlbumControllerCollectionDataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+			let cell = self?.artistViewModel.collectionViewCell(collectionView, atIndexPath: indexPath, forItemWithIdentifier: itemIdentifier)
 			
-			switch itemIdentifier {
-			case .album(let album):
-				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCollectionCell.reuseIdentifier, for: indexPath)
-				
-				if let cell = cell as? AlbumCollectionCell {
-					cell.configure(with: album.title, imageURL: album.coverURL)
-				}
-				
-				return cell
-			}
+			return cell
 		})
 		
 		return source
@@ -159,10 +148,6 @@ extension ArtistDetailsController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard let dataWrapper = dataSource.itemIdentifier(for: indexPath) else { return }
 		
-		switch dataWrapper {
-		case .album(let album):
-			delegate?.artistDetailsController(self, didSelectAlbum: album)
-		}
-		
+		artistViewModel.didSelectItemWithIdentifier(dataWrapper)
 	}
 }

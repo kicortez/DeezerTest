@@ -22,6 +22,9 @@
 		EAA1E346274BF63500195456 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E345274BF63500195456 /* Track.swift */; };
 		EAA1E348274C828F00195456 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E347274C828F00195456 /* AlbumViewModel.swift */; };
 		EAA1E34A274C86E300195456 /* TrackCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E349274C86E300195456 /* TrackCollectionCell.swift */; };
+		EAA1E34C274D093000195456 /* DateFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E34B274D093000195456 /* DateFormatHelper.swift */; };
+		EAA1E34E274D1D4600195456 /* ArtistViewModel+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E34D274D1D4600195456 /* ArtistViewModel+UI.swift */; };
+		EAA1E350274D320000195456 /* AlbumViewModel+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA1E34F274D320000195456 /* AlbumViewModel+UI.swift */; };
 		EAB512E62747BC5700586191 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E52747BC5700586191 /* AppDelegate.swift */; };
 		EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB512E72747BC5700586191 /* SceneDelegate.swift */; };
 		EAB512EF2747BC5A00586191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB512EE2747BC5A00586191 /* Assets.xcassets */; };
@@ -53,6 +56,9 @@
 		EAA1E345274BF63500195456 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		EAA1E347274C828F00195456 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		EAA1E349274C86E300195456 /* TrackCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCollectionCell.swift; sourceTree = "<group>"; };
+		EAA1E34B274D093000195456 /* DateFormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatHelper.swift; sourceTree = "<group>"; };
+		EAA1E34D274D1D4600195456 /* ArtistViewModel+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtistViewModel+UI.swift"; sourceTree = "<group>"; };
+		EAA1E34F274D320000195456 /* AlbumViewModel+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlbumViewModel+UI.swift"; sourceTree = "<group>"; };
 		EAB512E22747BC5700586191 /* DeezerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeezerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB512E52747BC5700586191 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAB512E72747BC5700586191 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +120,8 @@
 			children = (
 				EA98320D274BC573000452DA /* ArtistViewModel.swift */,
 				EAA1E347274C828F00195456 /* AlbumViewModel.swift */,
+				EAA1E34D274D1D4600195456 /* ArtistViewModel+UI.swift */,
+				EAA1E34F274D320000195456 /* AlbumViewModel+UI.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 				EA9831FD274935CD000452DA /* Network */,
 				EAB5130327492AE600586191 /* Extensions */,
 				EAB5130627492B2D00586191 /* Resources */,
+				EAA1E34B274D093000195456 /* DateFormatHelper.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -350,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAA1E350274D320000195456 /* AlbumViewModel+UI.swift in Sources */,
 				EA983203274A47DD000452DA /* DeezerService.swift in Sources */,
 				EAB513022748F36600586191 /* UICollectionView+Extensions.swift in Sources */,
 				EAB512FC2748E7DB00586191 /* HomeController.swift in Sources */,
@@ -358,6 +368,7 @@
 				EAB512FA2748E41E00586191 /* AppCoordinator.swift in Sources */,
 				EAA1E344274BF51400195456 /* AlbumManager.swift in Sources */,
 				EA9831FF274935E3000452DA /* APIManager.swift in Sources */,
+				EAA1E34C274D093000195456 /* DateFormatHelper.swift in Sources */,
 				EA983206274A6E78000452DA /* Artist.swift in Sources */,
 				EA98320A274A725E000452DA /* ArtistManager.swift in Sources */,
 				EA98320C274A7380000452DA /* ListResponse.swift in Sources */,
@@ -370,6 +381,7 @@
 				EA983201274936D1000452DA /* APIService.swift in Sources */,
 				EA98320E274BC573000452DA /* ArtistViewModel.swift in Sources */,
 				EAB512E82747BC5700586191 /* SceneDelegate.swift in Sources */,
+				EAA1E34E274D1D4600195456 /* ArtistViewModel+UI.swift in Sources */,
 				EA983213274BE613000452DA /* AlbumCollectionCell.swift in Sources */,
 				EAA1E348274C828F00195456 /* AlbumViewModel.swift in Sources */,
 				EAA1E346274BF63500195456 /* Track.swift in Sources */,

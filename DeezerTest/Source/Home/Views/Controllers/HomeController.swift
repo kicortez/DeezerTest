@@ -8,16 +8,8 @@
 import UIKit
 import Combine
 
-enum HomeControllerCollectionDataWrapper: Hashable {
-	case artist(artist: Artist)
-}
-
-internal typealias HomeControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, HomeControllerCollectionDataWrapper>
-internal typealias HomeControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, HomeControllerCollectionDataWrapper>
-
 protocol HomeControllerDelegate: AnyObject {
-	// Dummy
-	func homeController(_ controller: HomeController, didSelectArtist artist: Artist)
+	func homeController(_ controller: HomeController, didSelectArtist artistViewModel: ArtistViewModel)
 }
 
 class HomeController: UIViewController {
@@ -36,7 +28,6 @@ class HomeController: UIViewController {
 	
 	weak var delegate: HomeControllerDelegate?
 	
-	private var data: [HomeControllerCollectionDataWrapper] = []
 	private let artistViewModel: ArtistViewModel = ArtistViewModel()
 	
 	private var cancellables: Set<AnyCancellable> = Set()
@@ -46,7 +37,6 @@ class HomeController: UIViewController {
 		
 		setupViews()
 		setupSubscribers()
-		applySnapshot()
     }
 	
 	private func setupViews() {
@@ -88,16 +78,24 @@ class HomeController: UIViewController {
 		
 		// View model subscriber
 		artistViewModel
-			.$searchResults
+			.$artistSearchResults
 			.sink { [weak self] artists in
-				self?.data = artists.map({ .artist(artist: $0) })
-				self?.applySnapshot()
+				self?.applySnapshot(data: artists)
 			}
 			.store(in: &cancellables)
 		
+		artistViewModel
+			.$selectedArtistViewModel
+			.compactMap({ $0 })
+			.sink { [weak self] artistViewModel in
+				guard let self = self else { return }
+				self.delegate?.homeController(self, didSelectArtist: artistViewModel)
+			}
+			.store(in: &cancellables)
 	}
 	
-	private func applySnapshot() {
+	// NOTE: Need to update this if UI changes
+	private func applySnapshot(data: [HomeControllerCollectionDataWrapper]) {
 		var snapshot = HomeControllerCollectionSnapshot()
 		
 		snapshot.appendSections([1])
@@ -112,19 +110,9 @@ class HomeController: UIViewController {
 extension HomeController {
 	
 	private func makeDataSource() -> HomeControllerCollectionDataSource {
-		let source = HomeControllerCollectionDataSource(collectionView: collectionView, cellProvider: {
-			(collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
+		let source = HomeControllerCollectionDataSource(collectionView: collectionView, cellProvider: { [weak self] (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
 			
-			switch itemIdentifier {
-			case .artist(let artist):
-				let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistsCollectionCell.reuseIdentifier, for: indexPath)
-				
-				if let cell = cell as? ArtistsCollectionCell {
-					cell.configure(with: artist.name, imageURL: artist.imageURL)
-				}
-				
-				return cell
-			}
+			return self?.artistViewModel.collectionViewCell(collectionView, atIndexPath: indexPath, forItemWithIdentifier: itemIdentifier)
 		})
 		
 		return source
@@ -167,10 +155,7 @@ extension HomeController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard let dataWrapper = dataSource.itemIdentifier(for: indexPath) else { return }
 		
-		switch dataWrapper {
-		case .artist(let artist):
-			delegate?.homeController(self, didSelectArtist: artist)
-		}
+		artistViewModel.didSelectItemWithIdentifier(dataWrapper)
 	}
 	
 }

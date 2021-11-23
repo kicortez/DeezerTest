@@ -10,8 +10,11 @@ import Combine
 
 class ArtistViewModel {
 	
-	@Published var searchResults: [Artist] = []
-	@Published var artistAlbums: [Album] = []
+	@Published var artist: Artist?
+	@Published var artistSearchResults: [HomeControllerCollectionDataWrapper] = []
+	@Published var collectionData: [ArtistDetailsCollectionDataWrapper] = []
+	@Published var selectedAlbumViewModel: AlbumViewModel?
+	@Published var selectedArtistViewModel: ArtistViewModel?
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
@@ -27,18 +30,23 @@ class ArtistViewModel {
 				return (try? $0.get())?.data ?? []
 			})
 			.sink { [weak self] result in
-				self?.searchResults = result
+				self?.artistSearchResults = result.map({ .artist(artist: $0) })
 			}
 			.store(in: &cancellables)
 	}
 	
-	func getArtistAlbums(_ artistId: Int) {
+	func getArtistAlbums() {
+		guard let artistId = artist?.id else {
+			collectionData = []
+			return
+		}
+
 		artistManager.getArtistAlbums(artistId)
 			.map({
 				return (try? $0.get())?.data ?? []
 			})
 			.sink { [weak self] result in
-				self?.artistAlbums = result
+				self?.collectionData = result.map({ .album(album: $0) })
 			}
 			.store(in: &cancellables)
 	}
