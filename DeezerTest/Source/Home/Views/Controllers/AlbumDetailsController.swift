@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 enum AlbumDetailsCollectionDataWrapper: Hashable {
 	case track(track: Track)
@@ -27,6 +28,21 @@ class AlbumDetailsController: UIViewController {
 		collectionView.register(cell: TrackCollectionCell.self)
 		
 		return collectionView
+	}()
+	
+	private lazy var titleLabel: UILabel = {
+		let label = UILabel()
+		return label
+	}()
+	
+	private lazy var releaseDateLabel: UILabel = {
+		let label = UILabel()
+		return label
+	}()
+	
+	private lazy var albumImageView: UIImageView = {
+		let imageView = UIImageView()
+		return imageView
 	}()
 	
 	weak var delegate: HomeControllerDelegate?
@@ -52,15 +68,50 @@ class AlbumDetailsController: UIViewController {
 	}
 	
 	private func setupViews() {
-		view.backgroundColor = .white
+		view.backgroundColor = .systemBackground
 		
-		setupCollectionView()
-	}
-	
-	private func setupCollectionView() {
+		let mainStackView = UIStackView()
+		mainStackView.axis = .vertical
+		mainStackView.spacing = 8.0
+		
+		let topStackView = UIStackView()
+		topStackView.axis = .horizontal
+		topStackView.spacing = 8.0
+		
+		let labelStackView = UIStackView()
+		labelStackView.axis = .vertical
+		labelStackView.spacing = 8.0
+		
+		labelStackView.addArrangedSubview(titleLabel)
+		labelStackView.addArrangedSubview(releaseDateLabel)
+		titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+		
+		topStackView.addArrangedSubview(albumImageView)
+		topStackView.addArrangedSubview(labelStackView)
+		
+		mainStackView.addArrangedSubview(topStackView)
+		mainStackView.addArrangedSubview(collectionView)
+		
+		view.addSubview(mainStackView)
+		
+		mainStackView.translatesAutoresizingMaskIntoConstraints = false
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		view.addSubview(collectionView)
-		view.pin(collectionView)
+		albumImageView.translatesAutoresizingMaskIntoConstraints = false
+		titleLabel.translatesAutoresizingMaskIntoConstraints = false
+		releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint.activate([
+			mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+			mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+			view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: mainStackView.trailingAnchor),
+			view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: mainStackView.bottomAnchor),
+			
+			albumImageView.heightAnchor.constraint(equalToConstant: 100),
+			albumImageView.widthAnchor.constraint(equalToConstant: 100),
+		])
+		
+		titleLabel.text = album?.title
+		albumImageView.kf.setImage(with: album?.coverURL)
 	}
 	
 	private func setupSubscribers() {
