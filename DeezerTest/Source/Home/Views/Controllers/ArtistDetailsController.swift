@@ -15,6 +15,10 @@ enum ArtistDetailsCollectionDataWrapper: Hashable {
 internal typealias AlbumControllerCollectionDataSource = UICollectionViewDiffableDataSource<Int, ArtistDetailsCollectionDataWrapper>
 internal typealias AlbumControllerCollectionSnapshot = NSDiffableDataSourceSnapshot<Int, ArtistDetailsCollectionDataWrapper>
 
+protocol ArtistDetailsControllerDelegate: AnyObject {
+	func artistDetailsController(_ controller: ArtistDetailsController, didSelectAlbum album: Album)
+}
+
 class ArtistDetailsController: UIViewController {
 
 	private lazy var dataSource: AlbumControllerCollectionDataSource = makeDataSource()
@@ -26,6 +30,8 @@ class ArtistDetailsController: UIViewController {
 		
 		return collectionView
 	}()
+	
+	weak var delegate: ArtistDetailsControllerDelegate?
 	
 	private var artist: Artist?
 	private var data: [ArtistDetailsCollectionDataWrapper] = []
@@ -56,7 +62,9 @@ class ArtistDetailsController: UIViewController {
 	}
 	
 	private func setupCollectionView() {
+		collectionView.delegate = self
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		
 		view.addSubview(collectionView)
 		view.pin(collectionView)
 	}
@@ -143,4 +151,18 @@ extension ArtistDetailsController {
 		return section
 	}
 	
+}
+
+// MARK: - UICollectionViewDelegate
+extension ArtistDetailsController: UICollectionViewDelegate {
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		guard let dataWrapper = dataSource.itemIdentifier(for: indexPath) else { return }
+		
+		switch dataWrapper {
+		case .album(let album):
+			delegate?.artistDetailsController(self, didSelectAlbum: album)
+		}
+		
+	}
 }
