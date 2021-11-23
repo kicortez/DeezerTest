@@ -29,10 +29,8 @@ class HomeCoordinator {
 
 // MARK: - HomeControllerDelegate
 extension HomeCoordinator: HomeControllerDelegate {
-	func homeController(_ controller: HomeController, didSelectArtist artist: Artist) {
+	func homeController(_ controller: HomeController, didSelectArtist artistViewModel: ArtistViewModel) {
 		if let presenter = presenter as? UINavigationController {
-			let artistViewModel = ArtistViewModel()
-			artistViewModel.artist = artist
 			let artistDetailsController = ArtistDetailsController.generate(with: artistViewModel)
 			artistDetailsController.delegate = self
 			presenter.pushViewController(artistDetailsController, animated: true)

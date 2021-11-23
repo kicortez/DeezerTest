@@ -11,9 +11,10 @@ import Combine
 class ArtistViewModel {
 	
 	@Published var artist: Artist?
-	@Published var searchResults: [Artist] = []
+	@Published var artistSearchResults: [HomeControllerCollectionDataWrapper] = []
 	@Published var collectionData: [ArtistDetailsCollectionDataWrapper] = []
 	@Published var selectedAlbumViewModel: AlbumViewModel?
+	@Published var selectedArtistViewModel: ArtistViewModel?
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
@@ -29,7 +30,7 @@ class ArtistViewModel {
 				return (try? $0.get())?.data ?? []
 			})
 			.sink { [weak self] result in
-				self?.searchResults = result
+				self?.artistSearchResults = result.map({ .artist(artist: $0) })
 			}
 			.store(in: &cancellables)
 	}
