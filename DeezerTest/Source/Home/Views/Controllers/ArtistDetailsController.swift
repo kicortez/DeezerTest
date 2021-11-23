@@ -122,7 +122,7 @@ extension ArtistDetailsController {
 		return layout
 	}
 																				 
-	// MARK: - Artists Layout
+	// MARK: - Albums Layout
 	
 	private func buildAlbumsLayout() -> NSCollectionLayoutSection? {
 		let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
