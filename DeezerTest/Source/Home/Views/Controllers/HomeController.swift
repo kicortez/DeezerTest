@@ -59,7 +59,7 @@ class HomeController: UIViewController {
 	private func setupSearch() {
 		searchController.obscuresBackgroundDuringPresentation = false
 		searchController.hidesNavigationBarDuringPresentation = false
-		searchController.searchBar.placeholder = "Search"
+		searchController.searchBar.placeholder = "Search artist"
 		
 		definesPresentationContext = true
 		

@@ -24,7 +24,6 @@ class ArtistsCollectionCell: UICollectionViewCell {
 	
 	private lazy var disclosureImageView: UIImageView = {
 		let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
-		imageView.tintColor = .darkGray
 		imageView.contentMode = .scaleAspectFit
 		return imageView
 	}()
