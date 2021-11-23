@@ -12,7 +12,7 @@ class ArtistViewModel {
 	
 	@Published var artist: Artist?
 	@Published var searchResults: [Artist] = []
-	@Published var artistAlbums: [Album] = []
+	@Published var collectionData: [ArtistDetailsCollectionDataWrapper] = []
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	
@@ -35,7 +35,7 @@ class ArtistViewModel {
 	
 	func getArtistAlbums() {
 		guard let artistId = artist?.id else {
-			artistAlbums = []
+			collectionData = []
 			return
 		}
 
@@ -44,7 +44,7 @@ class ArtistViewModel {
 				return (try? $0.get())?.data ?? []
 			})
 			.sink { [weak self] result in
-				self?.artistAlbums = result
+				self?.collectionData = result.map({ .album(album: $0) })
 			}
 			.store(in: &cancellables)
 	}
