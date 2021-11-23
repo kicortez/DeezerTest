@@ -121,9 +121,12 @@ class AlbumDetailsController: UIViewController {
 		
 		albumViewModel
 			.$album
+			.compactMap({ $0 })
+			.map({ AlbumUIModel(with: $0) })
 			.sink { [weak self] album in
-				self?.titleLabel.text = album?.title
-				self?.albumImageView.kf.setImage(with: album?.coverURL)
+				self?.titleLabel.text = album.title
+				self?.albumImageView.kf.setImage(with: album.coverURL)
+				self?.releaseDateLabel.text = album.releaseDate
 			}
 			.store(in: &cancellables)
 	}
