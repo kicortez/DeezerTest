@@ -22,6 +22,13 @@ class ArtistsCollectionCell: UICollectionViewCell {
 		return imageView
 	}()
 	
+	private lazy var disclosureImageView: UIImageView = {
+		let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+		imageView.tintColor = .darkGray
+		imageView.contentMode = .scaleAspectFit
+		return imageView
+	}()
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
@@ -44,6 +51,7 @@ class ArtistsCollectionCell: UICollectionViewCell {
 		
 		stackView.addArrangedSubview(imageView)
 		stackView.addArrangedSubview(nameLabel)
+		stackView.addArrangedSubview(disclosureImageView)
 		
 		contentView.addSubview(stackView)
 		contentView.pin(stackView)
@@ -51,6 +59,8 @@ class ArtistsCollectionCell: UICollectionViewCell {
 		NSLayoutConstraint.activate([
 			imageView.heightAnchor.constraint(equalToConstant: 50),
 			imageView.widthAnchor.constraint(equalToConstant: 50),
+			disclosureImageView.heightAnchor.constraint(equalToConstant: 16),
+			disclosureImageView.widthAnchor.constraint(equalToConstant: 16),
 		])
 	}
 	
