@@ -30,5 +30,15 @@ extension ArtistViewModel {
 			return cell
 		}
 	}
+	
+	func didSelectItemWithIdentifier(_ itemIdentifier: ArtistDetailsCollectionDataWrapper) {
+		switch itemIdentifier {
+		case .album(let album):
+			let albumViewModel = AlbumViewModel()
+			albumViewModel.album = album
+			
+			selectedAlbumViewModel = albumViewModel
+		}
+	}
 
 }

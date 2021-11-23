@@ -34,20 +34,18 @@ extension HomeCoordinator: HomeControllerDelegate {
 			let artistViewModel = ArtistViewModel()
 			artistViewModel.artist = artist
 			let artistDetailsController = ArtistDetailsController.generate(with: artistViewModel)
-//			artistDetailsController.delegate = self
+			artistDetailsController.delegate = self
 			presenter.pushViewController(artistDetailsController, animated: true)
 		}
 	}
 }
 
 // MARK: - ArtistDetailsControllerDelegate
-//extension HomeCoordinator: ArtistDetailsControllerDelegate {
-//	func artistDetailsController(_ controller: ArtistDetailsController, didSelectAlbum album: Album) {
-//		if let presenter = presenter as? UINavigationController {
-//			let albumViewModel = AlbumViewModel()
-//			albumViewModel.album = album
-//			let albumDetailsController = AlbumDetailsController.generate(with: albumViewModel)
-//			presenter.pushViewController(albumDetailsController, animated: true)
-//		}
-//	}
-//}
+extension HomeCoordinator: ArtistDetailsControllerDelegate {
+	func artistDetailsController(_ controller: ArtistDetailsController, didSelectAlbum album: AlbumViewModel) {
+		if let presenter = presenter as? UINavigationController {
+			let albumDetailsController = AlbumDetailsController.generate(with: album)
+			presenter.pushViewController(albumDetailsController, animated: true)
+		}
+	}
+}

@@ -13,6 +13,7 @@ class ArtistViewModel {
 	@Published var artist: Artist?
 	@Published var searchResults: [Artist] = []
 	@Published var collectionData: [ArtistDetailsCollectionDataWrapper] = []
+	@Published var selectedAlbumViewModel: AlbumViewModel?
 	
 	private var cancellables: Set<AnyCancellable> = Set()
 	

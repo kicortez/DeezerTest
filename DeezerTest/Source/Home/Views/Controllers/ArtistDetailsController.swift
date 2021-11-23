@@ -84,6 +84,15 @@ class ArtistDetailsController: UIViewController {
 				self?.applySnapshot(data: data)
 			}
 			.store(in: &cancellables)
+		
+		artistViewModel
+			.$selectedAlbumViewModel
+			.compactMap({ $0 })
+			.sink { [weak self] albumViewModel in
+				guard let self = self else { return }
+				self.delegate?.artistDetailsController(self, didSelectAlbum: albumViewModel)
+			}
+			.store(in: &cancellables)
 	}
     
 }
@@ -139,6 +148,6 @@ extension ArtistDetailsController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		guard let dataWrapper = dataSource.itemIdentifier(for: indexPath) else { return }
 		
-		
+		artistViewModel.didSelectItemWithIdentifier(dataWrapper)
 	}
 }
